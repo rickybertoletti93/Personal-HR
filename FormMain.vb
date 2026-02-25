@@ -6,7 +6,8 @@ Public Class FormMain
     Private sidebarExpanded As Boolean = True
     Private Const SidebarExpandedWidth As Integer = 220
     Private Const SidebarCollapsedWidth As Integer = 64
-    Private settingsPage As New UcImpostazioni()
+    Private ReadOnly dashboardPage As New UcDashboard()
+    Private ReadOnly settingsPage As New UcImpostazioni()
 
 
     ' Testi completi (icona + nome) e testi compatti (solo icona)
@@ -34,8 +35,9 @@ Public Class FormMain
         ApplySidebarState(True)
 
 
-        ' evidenzia Dashboard come attivo (facoltativo)
+        ' evidenzia Dashboard come attivo e mostra la pagina
         SetActiveMenu(btnDashboard)
+        ShowPage(dashboardPage)
         AddHandler pnlTitleBar.MouseDown, AddressOf pnlTitleBar_MouseDown
         AddHandler btnImpostazioni.Click, AddressOf btnImpostazioni_Click
     End Sub
@@ -113,6 +115,7 @@ Public Class FormMain
     ' Click menu: per ora solo evidenzia
     Private Sub btnDashboard_Click(sender As Object, e As EventArgs) Handles btnDashboard.Click
         SetActiveMenu(btnDashboard)
+        ShowPage(dashboardPage)
     End Sub
 
     Private Sub btnTimbrature_Click(sender As Object, e As EventArgs) Handles btnTimbrature.Click
@@ -181,7 +184,7 @@ Public Class FormMain
 
     Private Sub btnImpostazioni_Click(sender As Object, e As EventArgs)
         SetActiveMenu(btnImpostazioni)
-        ShowPage(New UcImpostazioni())
+        ShowPage(settingsPage)
     End Sub
 
 
